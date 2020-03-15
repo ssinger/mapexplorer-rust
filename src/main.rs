@@ -2,6 +2,8 @@
 #[macro_use] extern crate rocket;
 use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
+use rocket::Rocket;
+mod pgcon;
 
 #[derive(serde::Serialize)]
 struct Page {
@@ -15,32 +17,15 @@ fn index()-> Template{
     Template::render("home",page)
 }
 
-#[get("/")]
-fn pgcon()-> Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/main",page)
-       
-}
 
-#[get("/")]
-fn pgconabout()->Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/about",page) 
-}
-
-#[get("/")]
-fn pgconinterest()->Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/interest",page) 
-}
 
 fn main() {
-    rocket::ignite()
-        .mount("/",routes![index])
-        .mount("/pgconmap",routes![pgcon])
-        .mount("/pgconmap/about",routes![pgconabout])
-        .mount("/pgconmap/interest",routes![pgconinterest])
-        .mount("/static", StaticFiles::from("static"))
+    let rocket = rocket::ignite()
+        .mount("/",routes![index]);
+    
+    let rocket= pgcon::add_routes(rocket);
+    
+    rocket.mount("/static", StaticFiles::from("static"))
         .attach(Template::fairing())
         .launch();
 }
