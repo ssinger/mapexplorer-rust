@@ -9,23 +9,28 @@ struct Page {
 }
 
 #[get("/")]
-pub fn main()-> Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
+fn main()-> Template {
+    let page = Page{title:
+                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
     Template::render("pgcon/main",page)
         
 }
     
 #[get("/about")]
-pub fn about()->Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
+fn about()->Template {
+    let page = Page{title:
+                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
     Template::render("pgcon/about",page) 
 }
 
 #[get("/interest")]
-pub fn interest()->Template {
-    let page = Page{title: String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
+fn interest()->Template {
+    let page = Page{title:
+                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
     Template::render("pgcon/interest",page) 
 }
+
+
 
 pub fn add_routes(rocket: Rocket)->Rocket {
     rocket
