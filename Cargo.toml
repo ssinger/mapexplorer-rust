@@ -1,0 +1,23 @@
+[package]
+name = "mapexplorer"
+version = "0.1.0"
+authors = ["ssinger"]
+edition = "2018"
+tera=1
+
+[dependencies]
+rocket = "0.4.4"
+
+[dependencies.rocket_contrib] 
+disable-features=false
+version= "0.4.4"
+features = ["handlebars_templates", "tera_templates"]
+
+[dependencies.tera]
+version="1"
+default-features=false
+
+[dependencies.serde]
+version="1.0.104"
+features=["derive"]
+

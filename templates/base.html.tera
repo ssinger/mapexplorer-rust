@@ -1,0 +1,44 @@
+<html>
+  {% block head %}
+  <head>
+    
+    <title>
+      {{ title }}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="A collection of community OpenStreetMap based maps for Oakville, Burlington,Ottawa,Huntsville Ontario,Peninsula Lake" />
+    <meta http-equiv="content-language" content="en-ca" />
+    <link rel="stylesheet" href="/static/application.css" type="text/css">
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <script src="/static/OpenLayers.js"></script>
+    
+    {% endblock head %}
+  </head>
+
+  <body>
+    
+    <div id="banner">
+      {% block banner %}
+      <h1>Map Explorer</h1>
+      <div id="nav-bar">
+	<ul>
+	  <li><a href="/view">Maps</a></li>
+	  <li><a href="/about">About</a></li>
+	</ul>
+      </div>
+      {% endblock banner %}
+    </div>
+    
+    <div id="body-container">
+      {% block navbar %}
+      {% endblock navbar %}
+      {% block content %}
+     
+      {% endblock content %}
+			
+    </div>
+   
+    <div id="footer">
+    </div>
+  </body>
+</html>

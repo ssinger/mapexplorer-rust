@@ -1,0 +1,13 @@
+{% extends "pgcon/main" %}
+{% block textblock %}
+<div class="text-block">
+<h1>PGCon Map</h1>
+
+<a href="http://www.pgcon.org">PGCON</a> is an annual <a href="http://www.postgresql.org">PostgreSQL</a> developers conference held in Ottawa, Ontario, Canada every May. PGCon is held at the University of Ottawa.
+
+<p>
+This map shows the area around the conference and highlights places that
+conference attendees might be interested in.
+
+</div>
+{% endblock textblock %}

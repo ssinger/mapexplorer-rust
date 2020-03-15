@@ -1,0 +1,78 @@
+{% extends "pgcon/main" %}
+{% block textblock %}
+<script defer="defer" type="text/javascript">
+
+  /**
+   * This javascript adds in the list of 'interesting' points'
+   * and associated popups.
+   */  
+  PointClickHandler = function (latlon,description) {
+    this.latlon=latlon;
+    this.description=description;
+  }
+  PointClickHandler.prototype.constructor=PointClickHandler;
+  PointClickHandler.prototype.onEvent = function(evt) {
+    var popup=new OpenLayers.Popup(null,this.latlon,new OpenLayers.Size(100,50),this.description,true);
+    map.addPopup(popup);	
+  }
+
+  var POIMapping=new Array();
+
+  /**
+   * Request the list of points from the server via 
+   * an HTTP GET request.
+   */
+  var client = new XMLHttpRequest();
+  client.open("GET",'/pgconmap/points' ,true);
+  client.onreadystatechange=function() {
+    if(client.readyState==4 && client.status==200) {
+      /**
+       *  The response is a JSON array of hashes (or should be)
+       */
+      var points=JSON.parse(client.responseText);
+      var markers = new OpenLayers.Layer.Markers("markers");
+      var size = new OpenLayers.Size(21,25);
+      var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+      var icon = new OpenLayers.Icon('/img/marker.png',size,offset);
+      map.addLayer(markers);     
+      for(var i=0; i < points.length; i++) {
+        var p=new OpenLayers.LonLat(points[i]['lon'],points[i]['lat']).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));
+	var marker=new OpenLayers.Marker(p,icon.clone());
+        var description=points[i]['description'];
+        /**
+         * Create a handler class for each point.  This will have access
+         * to the description.  The handler class will display a popup
+         * with the description when clicked.
+         */
+        var eventHandler = new PointClickHandler(p,description);
+        marker.events.register('mousedown',eventHandler,eventHandler.onEvent);
+        markers.addMarker(marker);
+
+        /**
+         * Built up a list of POI's that the user can click on to
+         * center the map on the POI. 
+         */
+        POIMapping[i]=p;		       
+        var POI_dom=document.getElementById('poi-list');
+        var li=document.createElement('li');
+        var link=document.createElement('a');
+        link.appendChild(document.createTextNode(description));
+        li.appendChild(link);
+        /**
+         * The coordinates of each POI are stored in the global array.
+         * The event handler for the 'on click' method of each link
+         * will lookup those coordinates. 
+         */
+        link.setAttribute('onclick','map.setCenter(POIMapping[' + i + '])');
+        POI_dom.appendChild(li);
+		       
+      }//for
+    }//if200
+  }//function
+  client.send()
+
+</script>
+
+<ul id='poi-list' class='poi-list'>
+</ul>
+{% endblock textblock %}

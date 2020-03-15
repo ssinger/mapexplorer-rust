@@ -1,0 +1,20 @@
+{% extends "base" %}
+{% block content %}
+<div id="content-container">
+  <div id='image-buttons'>
+    <ul>
+      <li>
+	<a href="/pgconmap" alt="PGCON Map"><img alt="Pgcon" src="/static/pgcon.png" /></a>
+      </li>
+      <li>
+	<a href="/penlakemap" alt="Peninsula Lake Map"><img alt="Penlakemap" src="/static/penlakemap.png" /></a>
+      </li>
+      <li>
+	<a href="/burlingtonrec" alt="Burlington &amp; Oakville Recreational Facilities"><img alt="Burlington_rec" src="/static/burlington_rec.jpg" /></a>
+      </li>
+    </ul>
+  </div>
+  <div class="map-extra-pane">
+  </div>
+</div>
+{% endblock content %}

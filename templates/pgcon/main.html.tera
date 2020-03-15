@@ -1,0 +1,97 @@
+{% extends "base" %}
+{% block navbar %}
+<div id='map-nav-bar' >
+  <ul>
+    <li>
+      <a href="/pgconmap">PGCon Map</a>
+    </li>
+    <li>
+      <a href="/pgconmap/about">About</a>
+    </li>
+    <li>
+      <a href="/pgconmap/interest">Points of Interest</a>
+    </li>
+  </ul>  
+</div>
+
+{% endblock navbar %}
+   
+{% block content %}
+<div id="content-container">
+  <div id="map"></div>
+  {% block textblock %}
+  <div class="text-block">
+    A Map for PGCon Attendees
+  </div>
+  {% endblock textblock %}
+</div>
+<div id='map-container' class="map-style">
+  <div   id="map" ></div>
+
+</div>
+<script defer="defer" type="text/javascript">
+  /**
+   * This code displays the main PGCON map.
+   * The map will be displayed inside of the div 'map' defined above.
+   */
+  var map, layer;
+  /**
+   *  We define the bounding box for the map.  We specifiy this box in
+   *  WGS 84 Lat/Lon coordinates but we must convert it to Spherical Mercator
+   *  since our map is in Spherical Mercator (epsg:900913)
+   */
+  var bounds= new OpenLayers.Bounds(-75.7001,45.4166,-75.674,45.435).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));
+  map = new OpenLayers.Map( 'map', 
+  {
+    maxExtent: bounds,
+    projection: "EPSG:900913",
+    units: "degree",
+    restrictedExtent:bounds,
+    controls : [new OpenLayers.Control.Attribution(),
+    new OpenLayers.Control.PanZoomBar(),
+    new OpenLayers.Control.Navigation()]  
+  });
+  
+  /**
+   * Next we define the base layer for the map.
+   * The URL comes from mapbox. 
+   */
+  var attributes={ 
+    attribution: "CC-BY-SA. OpenStreetMap & Contributors",
+    sphericalMercator: true,
+    minZoomLevel: 15,
+    maxZoomLevel: 18,
+    numZoomLevels:4,
+    zoomOffset: 15,
+    //providing the resolutions array is important when
+    //using restricted zooms. These numbers can be obtained
+    //from the web and are standard resolutions the zooms
+    //of a spherical mercator map.
+    resolutions: [ 4.777314266967774, 2.388657133483887, 
+    1.1943285667419434, 0.597164283],
+    units:"degree",
+    projection: "EPSG:900913",
+  }
+  
+  layer = new OpenLayers.Layer.XYZ("PGCon Map",
+            ["http://a.tiles.mapbox.com/v3/ssinger.pgcon/${z}/${x}/${y}.png",
+            "http://b.tiles.mapbox.com/v3/ssinger.pgcon/${z}/${x}/${y}.png",
+            "http://c.tiles.mapbox.com/v3/ssinger.pgcon/${z}/${x}/${y}.png"
+           ]
+  , attributes
+  );
+
+  //Add the layer to the map
+  map.addLayer(layer);
+  map.setCenter( new OpenLayers.LonLat(-75.68715,45.424).
+                     transform(
+                     new OpenLayers.Projection("EPSG:4326"),
+                     map.getProjectionObject()),1,true,true);
+ 		     
+
+</script>	
+
+
+{% endblock content %}
+
+
