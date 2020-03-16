@@ -33,7 +33,7 @@
       var markers = new OpenLayers.Layer.Markers("markers");
       var size = new OpenLayers.Size(21,25);
       var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-      var icon = new OpenLayers.Icon('/img/marker.png',size,offset);
+      var icon = new OpenLayers.Icon('/static/img/marker.png',size,offset);
       map.addLayer(markers);     
       for(var i=0; i < points.length; i++) {
         var p=new OpenLayers.LonLat(points[i]['lon'],points[i]['lat']).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));

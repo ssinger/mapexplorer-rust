@@ -21,3 +21,13 @@ default-features=false
 version="1.0.104"
 features=["derive"]
 
+[dependencies.postgres]
+version="0.17.1"
+
+[dependencies.postgres-openssl]
+version="0.3.0"
+
+[dependencies.openssl]
+version="0.10.28"
+
+

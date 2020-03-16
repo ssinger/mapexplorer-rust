@@ -2,7 +2,6 @@
 #[macro_use] extern crate rocket;
 use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
-use rocket::Rocket;
 mod pgcon;
 
 #[derive(serde::Serialize)]
