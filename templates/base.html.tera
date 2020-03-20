@@ -22,7 +22,7 @@
       <h1>Map Explorer</h1>
       <div id="nav-bar">
 	<ul>
-	  <li><a href="/view">Maps</a></li>
+	  <li><a href="/">Maps</a></li>
 	  <li><a href="/about">About</a></li>
 	</ul>
       </div>

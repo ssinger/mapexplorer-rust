@@ -1,0 +1,53 @@
+{% extends "penlake/main" %}
+{% block textblock %}
+<div class="text-block">
+
+
+<h2>What Is The Peninsula Lake Map</h2>
+The Peninsula Lake Map is a free community built  map of Peninsula lake based on a combination of OpenStreetMap data and depth data from Canadian Hydrological Service.
+
+<h2>What Map Features are included</h2>
+The Peninsula Lake Map contains a map of the lake including depth data, recreational facilities such as skiing, tennis courts and golf.
+Hotels are also included on the map
+
+<h2>What Do you mean by "Free"</h2>
+The Peninsula Lake Map is released under the CC-BYS-A  license.   This means that you are free to:
+
+    Print the map as many times as you want
+    Ad your companies logo to the map and sell it
+    Upload the map data to your GPS unit
+    Change the map as long as the changes are released under CC-BY-SA
+    Include the map in a book or as part of another web site
+As long as you comply with the terms of the CC-BY-SA license which include crediting "OpenStreetMap & Contributors" and the "Canadian Hydrological Service" and share any changes you make to the map.
+
+<h2>Where Does Data Come From</h2>
+In the spring and summer of 2009 the Canadian Hydrological service conducted a survey of Peninsula and Fairy lakes in preparation for the G8 summit that was held at Deerhurst Resort in 2010.  The depth data in this map is based on that survey work.
+
+The rest of the map is based on the OpenStreetMap project.  OpenStreetMap is buiding an editable wiki-style map of th eworld.  Data in the Huntsville area includes data collected by volunteers with handheld GPS units, traces of satellite images and data released by Natural Resources Canada.
+<h2>How Can I Help</h2>
+You can help by adding points of interest to the map.  You can either do this by adding them directly to OpenStreetMap (www.openstreetmap.org) or by emailing the GPS coordinates  along with a description to steve@ssinger.info.  In particular we would like to add
+
+    The location of bouys and navigation aids
+    The location of rocks trees and other underwater hazards
+    The names of any unamed bays or islands but please don't copy these from another map
+
+Email us If you have made significant updates to the map and would like new copies of the files generated.
+What Do the Depth Numbers Mean
+The depth numbers on the map are in feet (meters in the Oct 2010 edition) and indicate the distance from the high-water mark at Huntsville (The sounding datum) to the lake floor.  The sounding datum is 281.8 meters (913 feet).   This means that if in your boat over point on the map marked 10 and your GPS receiver says that your current altitude is 913.0 (feet) then you should expect 10 feet  of water below you.
+
+<h2>Is More Depth Data Available</h2>
+
+Yes.  The Canadian Hydrological Service collected a data point every one meter for much of the two lakes.  They have released a subset of this data, one point every 100 meters to us.    The printed version of the map only includes "interesting" points to not appear cluttered.    The files for GPS units will contain all of the data points released to us  you will also be able to download the raw data files (100m) in OpenStreetMap format from us.      The complete 1m resolution data is available for purchase from the Canadian Hydrological Service.
+
+<h2>Why Is There No Data In Some Places</h2>
+The Bay near Deerhurst Resort (north west) and the bay at the South East of the lake were not surveyed by the Canadian Hydrological Service because the water was deemed to be too shallow for them to work.   These areas remain uncharted.   Feel free to send in any observations you have of for these areas.
+
+<h2>Where Do The Contour Lines Come From</h2>
+
+The contour lines were interpolated with software based on the 100m soundings from the Canadian Hydrological Service.  They do not show the exact profile of the lake bed.
+
+<h2>I Hit a Rock While Using The Map</h2>
+
+The Pen Lake Map is clearly marked as "NOT FOR NAVIGATION" and "USE AT YOUR OWN RISK".   You were warned. Feel free to add any hazards you  survey  to the OpenStreetMap.
+</div>
+{% endblock textblock %}

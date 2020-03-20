@@ -1,0 +1,35 @@
+{% extends "base" %}
+{% block navbar %}
+<div id='map-nav-bar' >
+  <ul>
+    <li>
+      <a href="/penlakemap">Peninsula Lake Map</a>
+    </li>
+    <li>
+      <a href="/penlakemap/about">About</a>
+    </li>
+    <li>
+      <a href="https://scanningpages.wordpress.com/tag/penlakemap">Blog</a>
+    </li>
+    <li>
+      <a href="/penlakemap/downloads">Downloads</a>
+  </ul>  
+</div>
+
+{% endblock navbar %}
+   
+{% block content %}
+<div id="content-container">
+  <div id="map"></div>
+  {% block textblock %}
+  <div class="text-block">
+Peninsula Lake is a mid-sized lake near Huntsville, Ontario, Canada that
+is surronded by cottages, homes and resorts.
+<p>
+Most of Fairy lake is included in this map as well.  Fairy lake is the
+larger lake to the west of the map
+
+
+  </div>
+  {% endblock textblock %}
+</div>

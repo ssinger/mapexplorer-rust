@@ -1,0 +1,12 @@
+{% extends "penlake/main" %}
+{% block textblock %}
+<div class="text-block">
+<h1>Downloads</h1>
+<ul>
+<li> <a href="http://sourceforge.net/projects/penlakemap/files/penlake.2012.05.svg/download">Peninsula Lake May 2012 - SVG</a></li>
+<li> <a href="http://sourceforge.net/projects/penlakemap/files/penlake.2012.05.pdf/download"</a>Peninsula Lake May 2012 - PDF</a></li>
+<li> <a href="https://scanningpages.files.wordpress.com/2012/05/penlake-2012-05.png">Peninsula Lake May 2012 - PNG</a></li>
+</ul>
+
+</div>
+{% endblock textblock %}

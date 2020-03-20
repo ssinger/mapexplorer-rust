@@ -7,29 +7,32 @@ use openssl::ssl::{SslConnector,SslMethod,SslVerifyMode};
 
 #[derive(serde::Serialize)]
 struct Page {
-    title : String
+    title: String
 }
 
 #[get("/")]
-fn main()-> Template {
-    let page = Page{title:
-                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/main",page)
-        
-}
-    
-#[get("/about")]
-fn about()->Template {
-    let page = Page{title:
-                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/about",page) 
+fn main()->Template {
+    let page = Page { title:
+                      String::from("Peninsula Lake Map(Huntsville,Ontario)")
+    };
+    Template::render("penlake/main",page)
 }
 
-#[get("/interest")]
-fn interest()->Template {
-    let page = Page{title:
-                    String::from("MapExplorer - PGCon Map (Ottawa, Ontario)")};
-    Template::render("pgcon/interest",page) 
+#[get("/about")]
+fn about()->Template {
+     let page = Page { title:
+                      String::from("Peninsula Lake Map(Huntsville,Ontario)")
+    };
+    Template::render("penlake/about",page)
+}
+
+
+#[get("/downloads")]
+fn downloads()->Template {
+     let page = Page { title:
+                      String::from("Peninsula Lake Map(Huntsville,Ontario)")
+    };
+    Template::render("penlake/downloads",page)
 }
 
 #[derive(serde::Serialize)]
@@ -49,7 +52,7 @@ fn points()->Json<Vec<Point>>{
     let connector = MakeTlsConnector::new(builder.build());
     
     let mut pgclient = Client::connect(&db_url,connector).unwrap();
-    let query = "select lat,lon,point_type,description from points where point_type='pgcon'";
+    let query = "select lat,lon,point_type,description from points where point_type='penlakemap'";
     let args=[];
     for row in pgclient.query(query,&args).unwrap() {
         result.push(Point{lat: row.get(0), lon:row.get(1), description: row.get(3)});        
@@ -60,10 +63,6 @@ fn points()->Json<Vec<Point>>{
 }
 
 pub fn add_routes(rocket: Rocket)->Rocket {
-    rocket
-        .mount("/pgconmap",
-               routes![main,
-                       about,
-                       interest,
-                       points])
+    rocket.mount("/penlakemap",
+                 routes![main,about,downloads,points])
 }

@@ -1,0 +1,105 @@
+{% extends "base" %}
+{% block navbar %}
+<div id='map-nav-bar' >
+  <ul>
+    <li>
+      <a href="/penlakemap">Peninsula Lake Map</a>
+    </li>
+    <li>
+      <a href="/penlakemap/about">About</a>
+    </li>
+    <li>
+      <a href="https://scanningpages.wordpress.com/tag/penlakemap">Blog</a>
+    </li>
+    <li>
+      <a href="/penlakemap/downloads">Downloads</a>
+  </ul>  
+</div>
+
+{% endblock navbar %}
+   
+{% block content %}
+<div id="content-container">
+  <div id='map-container' class='map-style'>
+  <div id="map"></div>
+  <script defer="defer" type="text/javascript">
+  var map, layer;
+  var bounds= new OpenLayers.Bounds(-79.2274,45.3087,-79.0338,45.3666).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));
+  map = new OpenLayers.Map( 'map',
+  {
+  maxExtent:bounds,
+  projection: "EPSG:900913",
+  units: "degree",
+  restrictedExtent: bounds,
+  controls : [new OpenLayers.Control.Attribution(),
+  new OpenLayers.Control.PanZoomBar(),
+  new OpenLayers.Control.Navigation()]
+
+  });
+  layer = new OpenLayers.Layer.XYZ("Penlake Map",
+  ["http://a.tiles.mapbox.com/v3/ssinger.penlake/${z}/${x}/${y}.png",
+  "http://b.tiles.mapbox.com/v3/ssinger.penlake/${z}/${x}/${y}.png",
+  "http://c.tiles.mapbox.com/v3/ssinger.penlake/${z}/${x}/${y}.png"
+  ]
+, { attribution: "CC-BY-SA. OpenStreetMap & Contributors + Canadian Hydrological Service. NOT FOR NAVIGATION",
+  sphericalMercator: true,
+  minZoomLevel: 13,
+  maxZoomLevel: 17,
+  numZoomLevels:5,
+  zoomOffset: 13,
+  resolutions: [ 19.109257067871095,
+  9.554628533935547, 4.777314266967774, 2.388657133483887,
+  1.1943285667419434],
+  units:"degree",
+  projection: "EPSG:900913",
+  }
+  );
+  map.addLayer(layer);
+  map.setCenter(
+  new OpenLayers.LonLat(-79.12715,45.36535).transform(
+  new OpenLayers.Projection("EPSG:4326"),
+  map.getProjectionObject()),1,true,true);
+  var client = new XMLHttpRequest();
+  client.open("GET",'<%= penlakemap_points_path %>' ,true);
+  client.onreadystatechange=function() {
+  if(client.readyState==4 && client.status==200) {
+    var points=JSON.parse(client.responseText);
+    var markers = new OpenLayers.Layer.Markers("markers");
+    var size = new OpenLayers.Size(21,25);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+    var icon = new OpenLayers.Icon('img/marker.png',size,offset);
+    map.addLayer(markers);
+    for(var i=0; i < points.length; i++) {
+                     var p=new OpenLayers.LonLat(points[i]['lon'],points[i]['lat']).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));
+                     var marker=new OpenLayers.Marker(p,icon.clone());
+                     var description=points[i]['description'];
+                     marker.events.register('mousedown',marker,function(evt) {
+                     var popup=new OpenLayers.Popup(i,p,new OpenLayers.Size(100,50),description,true);
+                     map.addPopup(popup);
+                     });
+                     markers.addMarker(marker);
+
+     }//for
+
+   }//if200
+  }//function
+client.send()
+</script>
+  </div>
+
+
+  
+  {% block textblock %}
+  <div class="text-block">
+Peninsula Lake is a mid-sized lake near Huntsville, Ontario, Canada that
+is surronded by cottages, homes and resorts.
+<p>
+Most of Fairy lake is included in this map as well.  Fairy lake is the
+larger lake to the west of the map
+
+
+  </div>
+  {% endblock textblock %}
+</div>
+
+{% endblock content %}
