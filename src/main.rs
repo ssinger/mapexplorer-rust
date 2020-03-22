@@ -16,11 +16,16 @@ fn index()-> Template{
     Template::render("home",page)
 }
 
+#[get("/about")]
+fn about()->Template {
+    let page = Page {title: String::from("MapExplorer - Exploring Communities Through Maps")};
+    Template::render("about",page)
+}
 
 
 fn main() {
     let rocket = rocket::ignite()
-        .mount("/",routes![index]);
+        .mount("/",routes![index,about]);
     
     let rocket= pgcon::add_routes(rocket);
     let rocket = penlake::add_routes(rocket);
