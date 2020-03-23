@@ -21,6 +21,7 @@
 {% block content %}
 <div id="content-container">
   <div id='map-container' class='map-style'>
+    
   <div id="map"></div>
   <script defer="defer" type="text/javascript">
   var map, layer;
@@ -60,7 +61,7 @@
   new OpenLayers.Projection("EPSG:4326"),
   map.getProjectionObject()),1,true,true);
   var client = new XMLHttpRequest();
-  client.open("GET",'<%= penlakemap_points_path %>' ,true);
+  client.open("GET",'/penlakemap/points' ,true);
   client.onreadystatechange=function() {
   if(client.readyState==4 && client.status==200) {
     var points=JSON.parse(client.responseText);

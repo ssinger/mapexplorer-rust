@@ -4,6 +4,8 @@ use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
 mod pgcon;
 mod penlake;
+mod burlingtonrec;
+
 #[derive(serde::Serialize)]
 struct Page {
     title : String
@@ -29,6 +31,8 @@ fn main() {
     
     let rocket= pgcon::add_routes(rocket);
     let rocket = penlake::add_routes(rocket);
+    let rocket = burlingtonrec::add_routes(rocket);
+    
     rocket.mount("/static", StaticFiles::from("static"))
         .attach(Template::fairing())
         .launch();

@@ -1,0 +1,92 @@
+{% extends "base" %}
+{% block navbar %}
+<div id='map-nav-bar' >
+<ul>
+  <li>
+    <a href="/burlingtonrec">Map</a>
+  </li>
+  <li>
+    <a href="/burlingtonrec/about">About</a>
+ </li>
+  <li>
+    <a href="/burlingtonrec/pools">Pools</a>
+ </li>
+  <li>
+    <a href="/burlingtonrec/splash">Splash Pads</a>
+ </li>
+</ul>
+
+</div>
+
+
+{% endblock navbar %}
+
+{% block content %}
+<div id="content-container" >
+  <div id="map-container" class="map-style">
+    <h1>Recreational Facilities in Burlington and Oakville</h1>
+    <div id="map"></div>
+    <script defer="defer" type="text/javascript">
+
+  var bounds= new OpenLayers.Bounds(-79.889,43.229,-79.6485,43.5129).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"));
+  map = new OpenLayers.Map( 'map',
+  {
+    maxExtent: bounds,
+    projection: "EPSG:900913",
+    units: "degree",
+    restrictedExtent:bounds,
+    controls : [new OpenLayers.Control.Attribution(),
+    new OpenLayers.Control.PanZoomBar(),
+    new OpenLayers.Control.Navigation()]
+  });
+  /**
+   * Next we define the base layer for the map.
+   * The URL comes from mapbox.
+   */
+  var attributes={
+    attribution: "CC-BY-SA. OpenStreetMap & Contributors",
+    sphericalMercator: true,
+    minZoomLevel: 11,
+    maxZoomLevel: 17,
+    numZoomLevels:7,
+    zoomOffset: 11,
+    //providing the resolutions array is important when
+    //using restricted zooms. These numbers can be obtained
+    //from the web and are standard resolutions the zooms
+    //of a spherical mercator map.
+    resolutions: [76.437028271484384,38.218514135742192,19.109257067871096,9.554628533935548, 4.777314266967774, 2.388657133483887,
+    1.1943285667419434],
+    units:"degree",
+    projection: "EPSG:900913",
+  }
+  layer = new OpenLayers.Layer.XYZ("PGCon Map",
+            ["http://a.tiles.mapbox.com/v3/ssinger.map-v62fuwdi/${z}/${x}/${y}.png",
+            "http://b.tiles.mapbox.com/v3/ssinger.map-v62fuwdi/${z}/${x}/${y}.png",
+            "http://c.tiles.mapbox.com/v3/ssinger.map-v62fuwdi/${z}/${x}/${y}.png"
+           ]
+  , attributes
+  );
+
+  //Add the layer to the map
+  map.addLayer(layer);
+  map.setCenter( new OpenLayers.LonLat(-79.6945,43.3601).
+                     transform(
+                     new OpenLayers.Projection("EPSG:4326"),
+                     map.getProjectionObject()),1,true,true);
+
+
+</script>
+<div>
+This map contains overlay data that is copyright the City of Burlington. See <a href="http://cms.burlington.ca/AssetFactory.aspx?did=18762"> terms of use</a> for additional restrictions.
+</div>
+{% block interest %}
+{% endblock interest %}
+  </div>
+{% block textblock %}  
+  <div class="text-block">
+    Recreational Facilities in Burlington and Oakville, Ontario
+  </div>
+{% endblock textblock %}
+</div>
+
+{% endblock content %}

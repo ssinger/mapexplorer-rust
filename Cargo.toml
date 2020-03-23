@@ -27,7 +27,12 @@ version="0.17.1"
 [dependencies.postgres-openssl]
 version="0.3.0"
 
+[dependencies.postgres-types]
+version="0.1.1"
+features=["derive"]
+
 [dependencies.openssl]
 version="0.10.28"
+
 
 
