@@ -1,0 +1,18 @@
+{% extends "base" %}
+{% block content %}
+<div id="container" class="text-block">
+<h1>About MapExplorer</h1>
+MapExplorer.org is a site dedicated to exploring communities through
+customized maps using Open Data.
+
+MapExplorer.org uses <a href="http://www.openstreetmap.org">OpenStreetMap</a>
+data combined with local data to explore the themes featured on each map.
+
+<h2>
+Contact
+</h2>
+MapExplorer.org is a project by <a href="http://scanningpages.wordpress.com">Steve  Singer</a>.  You can contact him through
+email at steve@ssinger.info.
+</div>
+
+{% endblock content %}
