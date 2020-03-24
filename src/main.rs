@@ -34,6 +34,7 @@ fn main() {
     let rocket = burlingtonrec::add_routes(rocket);
     
     rocket.mount("/static", StaticFiles::from("static"))
+        .mount("/.well-known",StaticFiles::from("well-known"))
         .attach(Template::fairing())
         .launch();
 }
