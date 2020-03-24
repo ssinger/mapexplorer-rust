@@ -1,8 +1,10 @@
-FROM rust_devel as build
+#FROM rust_devel as build
+FROM rust:1.42-stretch
+RUN rustup default nightly
 RUN mkdir /build
 COPY Cargo.toml /build
 COPY src /build/src
-COPY cargo-cache/registry/ /usr/local/cargo/registry
+#COPY cargo-cache/registry/ /usr/local/cargo/registry
 RUN cd /build; cargo build
 
 FROM debian:stable
