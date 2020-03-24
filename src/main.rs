@@ -34,7 +34,7 @@ fn main() {
     let rocket = burlingtonrec::add_routes(rocket);
     
     rocket.mount("/static", StaticFiles::from("static"))
-        .mount("/.well-known",StaticFiles::from("well-known"))
+        .mount("/.well-known/acme-challenge",StaticFiles::from("well-known/acme-challenge"))
         .attach(Template::fairing())
         .launch();
 }
