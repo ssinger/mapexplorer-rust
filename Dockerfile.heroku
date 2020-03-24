@@ -11,4 +11,5 @@ RUN apt-get install -y libssl1.1 ca-certificates
 COPY --from=build /build/target/debug/mapexplorer /mapexplorer
 COPY static /static
 COPY templates /templates
-ENTRYPOINT ["/mapexplorer"]
+COPY entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
