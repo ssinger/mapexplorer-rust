@@ -12,4 +12,6 @@ COPY --from=build /build/target/debug/mapexplorer /mapexplorer
 COPY static /static
 COPY templates /templates
 COPY entrypoint.sh /entrypoint.sh
+COPY well-known /well-known
+COPY well-known/acme-challenge /well-known/acme-challenge
 ENTRYPOINT ["/entrypoint.sh"]

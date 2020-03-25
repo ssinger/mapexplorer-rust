@@ -33,7 +33,8 @@ fn main() {
     let rocket = penlake::add_routes(rocket);
     let rocket = burlingtonrec::add_routes(rocket);
     
-    rocket.mount("/static", StaticFiles::from("static"))
+    let rocket = rocket.mount("/static", StaticFiles::from("static"));
+    rocket
         .mount("/.well-known/acme-challenge",StaticFiles::from("well-known/acme-challenge"))
         .attach(Template::fairing())
         .launch();
